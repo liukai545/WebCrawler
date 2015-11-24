@@ -3,10 +3,9 @@ package crawler.http
 import java.io.{ByteArrayOutputStream, InputStream}
 import java.net.URL
 
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager
 import org.apache.http.HttpEntity
-import org.apache.http.impl.client.{HttpClients, HttpClientBuilder}
 import org.apache.http.client.methods.{CloseableHttpResponse, HttpGet}
+import org.apache.http.impl.client.HttpClients
 
 /**
   * Created by kai on 2015/11/22.
@@ -15,10 +14,9 @@ class HttpClient {
 }
 
 object HttpClient {
+  val httpClient = HttpClients.createDefault()
 
   def get(url: String) = {
-    val httpClient =  HttpClients.custom().build()
-
     val httpGet = new HttpGet(url);
     val response: CloseableHttpResponse = httpClient.execute(httpGet)
 
@@ -31,12 +29,8 @@ object HttpClient {
       while (in.read(buffer, 0, 1024) != -1) {
         out.write(buffer)
       }
-      response.close()
-      httpClient.close()
       (responseCode, out.toByteArray)
     } else {
-      response.close()
-      httpClient.close()
       (responseCode, null)
     }
   }
