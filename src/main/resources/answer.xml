@@ -1,0 +1,92 @@
+<div id="zh-question-title" data-editable="false">
+
+    <h2 class="zm-item-title zm-editable-content">
+
+        <a href="/question/37833619">如何评价小米11月24日推出的可搭载Win10系统的小米平板2？</a>
+
+    </h2>
+</div>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<div class="zm-editable-content">
+<p>相关问题：
+    <a href="http://www.zhihu.com/question/37636688" class="internal">如何评价小米新推出的指纹金属千元机红米 Note 3？ - 手机</a>
+    <br>
+</p>
+<br>
+<p>11月24日小米发布<strong>小米平板2：</strong>全金属机身，厚度为 6.95mm，重量为 322g，较小米一代更轻更薄，且小米声称握感更佳。香槟金、太空银双色可选。该平板配置为：Intel 凌动 Atom 14nm
+    制程处理器、7.9英寸夏普视网膜显示屏、800万+500万相机、6190mAh电池，标配双面可插的 USB Type-C 接口。售价为 999元起步，64G/64G Windows 10 版则为 1299元，11月27日起售。
+</p>
+<br>
+<p>官网介绍：
+    <a href="http://www.mi.com/mipad2/" class=" wrap external" target="_blank" rel="nofollow noreferrer">小米平板2 － 小米手机官网
+        <i class="icon-external"></i>
+    </a>
+    <br>
+</p>
+<img src="https://pic3.zhimg.com/4da696b2fbd7e404f195f9e00fa25ede_b.png" data-rawheight="376" data-rawwidth="669"
+     class="origin_image zh-lightbox-thumb"
+     data-original="https://pic3.zhimg.com/4da696b2fbd7e404f195f9e00fa25ede_r.png">
+</div>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<div class="zm-tag-editor-labels zg-clear">
+
+<a class="zm-item-tag"
+   href="/topic/19551667"
+   data-tip="t$b$19551667" data-token="19551667" data-topicid="484">
+    微软（Microsoft）
+</a>
+
+<a class="zm-item-tag"
+   href="/topic/19552883"
+   data-tip="t$b$19552883" data-token="19552883" data-topicid="890">
+    小米科技
+</a>
+
+<a class="zm-item-tag"
+   href="/topic/19922852"
+   data-tip="t$b$19922852" data-token="19922852" data-topicid="126290">
+    小米平板
+</a>
+
+<a class="zm-item-tag"
+   href="/topic/20007813"
+   data-tip="t$b$20007813" data-token="20007813" data-topicid="154649">
+    Windows 10
+</a>
+
+<a class="zm-item-tag"
+   href="/topic/20032200"
+   data-tip="t$b$20032200" data-token="20032200" data-topicid="162923">
+    小米平板 2
+</a>
+
+</div>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<div class="zm-item-answer-author-info">
+
+<a class="zm-item-link-avatar avatar-link" href="/people/zhang-xiong-fei-42" data-tip="p$t$zhang-xiong-fei-42">
+    <img src="https://pic4.zhimg.com/83bbbc0bf_s.jpg" class="zm-list-avatar avatar">
+</a>
+
+<a class="author-link" data-tip="p$t$zhang-xiong-fei-42" href="/people/zhang-xiong-fei-42">张雄飞</a>，
+<span title="it专业打工" class="bio">it专业打工</span>
+</div>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<div class="zm-editable-content clearfix">
+作为一个在Intel专门做Windows ATOM平板的工程师，我觉得有些回答者没用过Win平板，凭着xp时代的经验想当然得出结论，还头头是道，然后一群人顶，也是醉了。
+<br>
+<br>Intel开发的的ATOM Windows平板参考板都是2K屏幕2GB内存的，从BayTrail年代开始就不卡了，一般使用绝对流畅，IE开10几个浏览窗口，同时放高清1080p也没问题。<br>这些都是些常规的测试项，毫无压力！
+<br>
+<b>小米这个板子没有什么难度，Cherry Trail参考板2K屏幕使用2GB内存不会卡。</b>
+<br>我说的流畅是指普通使用，包括上网，聊天，看高清，不包括打一些要求比较高的游戏。
+<br>
+<br>为什么2G内存Win平板就能流畅呢？<br>1. 微软从Win8.1开始针对小内存平板有优化。<br>2. Win10或者win8.1并不怎么消耗资源，对最近的Intel x86架构平台优化的很好，在这些平台上，甚至<b>
+    比Win7更快</b>。<br>3. Intel的atom平板使用<b>EMMC硬盘，随机读写速度远胜普通机械硬盘</b>，类似于SSD。如果你用1G内存+SSD硬盘，普通台式机装win8.1或者Win10，其实一点都不慢
+<br>
+<br>为什么64G硬盘就基本够用了呢？<br>1. Win8.1可以使用Wimboot方式安装，大概本身只占用5GB空间<br>2. Win10可以使用Compact模式安装，我手头的一台64GB的平板，<b>
+    安装好Win10和驱动，装了Office2016专业版全套，还有46GB可用</b>。我觉得对于一般人够用了。
+<br>
+<br>BTW,<br>本人去年做的1G内存+16G EMMC的山寨厂参考板，一般使用也没什么问题。<br>现在市面上卖的山寨win平板，基本是抄的我这个板子。当然，大家普遍改成了2G+32GB的。
+
+</div>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++

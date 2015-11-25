@@ -14,13 +14,9 @@ class DIVExtrator private(parser: Parser) {
 
   def extractDiv(filter: NodeFilter): Option[Node] = {
     var node: Option[Node] = None
-    val matched: NodeList = nodeList.extractAllNodesThatMatch(filter, true)
+    val matched: NodeList = nodeList.extractAllNodesThatMatch(filter, false)
     if (matched.size() >= 1) {
-      println(matched.elementAt(0).toHtml())
       node = Some(matched.elementAt(0))
-    } else {
-      println(matched.size())
-      println("mei pi pei dao")
     }
     node
   }
