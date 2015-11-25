@@ -26,8 +26,8 @@ public class TestHtmlParser {
         if (nodes != null) {
             for (int i = 0; i < nodes.size(); i++) {
                 Node textnode = (Node) nodes.elementAt(i);
-                //System.out.println(textnode.getText());
-                System.out.println(("getText:" + textnode.toHtml().replaceAll("<br>",System.lineSeparator()).replaceAll("<.*?[b|u|div].*?>"," ")));
+                System.out.println(textnode.getText());
+                //System.out.println(("getText:" + textnode.toHtml().replaceAll("<br>",System.lineSeparator()).replaceAll("<.*?[b|u|div].*?>"," ")));
                 System.out.println(("================================================="));
             }
         }

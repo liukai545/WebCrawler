@@ -18,6 +18,6 @@ object Main extends App {
   private val links: mutable.Set[String] = new Crawler().getAnswerLinks(topicURL, num)
   links.foreach(println)*/
 
-  new Crawler().getAnswler("http://www.zhihu.com/question/21391305/answer/44542857")
+  new Crawler().getAnswler("http://www.zhihu.com/question/37833619/answer/73823392")
 
 }

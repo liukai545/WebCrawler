@@ -2,6 +2,7 @@ package crawler
 
 import crawler.extrator.{FilterEnum, DIVExtrator, LinksExtrator}
 import crawler.http.HttpClient
+import crawler.utils.Logs
 import org.htmlparser.Node
 
 import scala.collection.mutable
@@ -9,7 +10,7 @@ import scala.collection.mutable
 /**
   * Created by kai on 2015/11/22.
   */
-class Crawler {
+class Crawler extends Logs {
   def getAnswerLinks(topicURL: String, pageNo: Int): scala.collection.mutable.Set[String] = {
     val (reponseCode, content) = HttpClient.get(topicURL + "?page=" + pageNo)
 
@@ -29,10 +30,26 @@ class Crawler {
   def getAnswler(answerURL: String) = {
     val (reponseCode, content) = HttpClient.get(answerURL)
     if (reponseCode == 200) {
-      val extrator: DIVExtrator = DIVExtrator(content)
-      val div: Unit = extrator.extractDiv(FilterEnum.content)
-    } else {
+      val extrator: DIVExtrator = DIVExtrator(answerURL)
 
+      for (div <- extrator.extractDiv(FilterEnum.title)) {
+        println(div.toHtml() + System.lineSeparator() + "+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      }
+      for (div <- extrator.extractDiv(FilterEnum.question)) {
+        println(div.toHtml() + System.lineSeparator() + "+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      }
+      for (div <- extrator.extractDiv(FilterEnum.label)) {
+        println(div.toHtml() + System.lineSeparator() + "+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      }
+      for (div <- extrator.extractDiv(FilterEnum.author)) {
+        println(div.toHtml() + System.lineSeparator() + "+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      }
+      for (div <- extrator.extractDiv(FilterEnum.content)) {
+        println(div.toHtml() + System.lineSeparator() + "+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      }
+    } else {
+      warn(answerURL + " Connected Failed " + reponseCode)
+      println("http error")
     }
   }
 }

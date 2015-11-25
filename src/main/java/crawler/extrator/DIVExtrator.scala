@@ -1,27 +1,35 @@
 package crawler.extrator
 
-import org.htmlparser.filters.{HasAttributeFilter, TagNameFilter}
+import java.net.{URLConnection, HttpURLConnection, URL}
+
+import org.htmlparser.filters.{TagNameFilter, HasAttributeFilter}
 import org.htmlparser.util.NodeList
 import org.htmlparser.{Node, NodeFilter, Parser}
-import java.nio.charset.Charset
 
 /**
   * Created by kai on 2015/11/24.
   */
 class DIVExtrator private(parser: Parser) {
+  val nodeList: NodeList = parser.extractAllNodesThatMatch(new TagNameFilter("div"))
 
-  def extractDiv(filter: NodeFilter) = {
-    val matched: NodeList = parser.extractAllNodesThatMatch(filter)
-
-    if (matched.size() == 1) {
-      val node: Node = matched.elementAt(0)
+  def extractDiv(filter: NodeFilter): Option[Node] = {
+    var node: Option[Node] = None
+    val matched: NodeList = nodeList.extractAllNodesThatMatch(filter, true)
+    if (matched.size() >= 1) {
+      println(matched.elementAt(0).toHtml())
+      node = Some(matched.elementAt(0))
+    } else {
+      println(matched.size())
+      println("mei pi pei dao")
     }
+    node
   }
 }
 
 object DIVExtrator {
-  def apply(content: Array[Byte], charset: String = "UTF-8") = {
-    new DIVExtrator(Parser.createParser(new String(content, Charset.forName(charset)), charset))
+  def apply(url: String) = {
+    val connection: URLConnection = new URL(url).openConnection()
+    new DIVExtrator(new Parser(connection.asInstanceOf[HttpURLConnection]))
   }
 }
 
