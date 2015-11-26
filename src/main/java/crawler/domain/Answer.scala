@@ -1,7 +1,8 @@
 package crawler.domain
 
-class Answer(url:String){
+class Answer(val url:String){
   var title:String = null
+  var question:String = null
   var labels:Array[String] = null
   var auther:String = null
   var content:String = null
