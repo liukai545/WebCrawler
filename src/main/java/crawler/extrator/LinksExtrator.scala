@@ -16,7 +16,7 @@ object LinksExtrator extends Extrator {
   def extratLinks(content: String, linkRule: ExtratRule = linkRule) = {
     val set = scala.collection.mutable.Set[String]()
     extrat(linkRule, content).foreach(str => {
-      (set += Constant.ZHIHU_URL + str)
+      (set += str)
     })
     set
   }
