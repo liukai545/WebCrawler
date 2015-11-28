@@ -4,8 +4,6 @@ import java.util.concurrent.{ExecutorService, Executors, Executor}
 
 import crawler.dao.{RespositoryFactory, JsonRepository, RepositoryCategory}
 import crawler.domain.Answer
-import crawler.extrator.LinksExtrator
-import crawler.http.HttpClient
 import crawler.utils.Constant
 
 import scala.actors.Actor
@@ -17,7 +15,7 @@ import scala.actors.Actor._
   * Created by kai on 2015/11/22.
   */
 object Main extends App {
-  val topicURL = "http://www.zhihu.com/collection/43011531"
+  val topicURL = "http://www.zhihu.com/collection/45162757"
 
   private val links: mutable.Set[String] = new Crawler().getAnswerLinks(topicURL)
 
