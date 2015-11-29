@@ -19,10 +19,14 @@ class CSVRepository[T](path: String) extends Repository[T] {
       sb.append(answer.url).append("*#*#")
       sb.append(answer.auther).append("*#*#")
       sb.append(answer.title).append("*#*#")
-      sb.append(answer.labels.mkString("(", ",", ")")).append("*#*#")
+      val labels: Array[String] = answer.labels
+      if (labels != null)
+        sb.append(labels.mkString("(", ",", ")")).append("*#*#")
       sb.append(answer.question).append("*#*#")
       sb.append(answer.content).append("*#*#")
-      sb.append(answer.imgLinks.mkString("(", ",", ")")).append("@@@@")
+      val links: Array[String] = answer.imgLinks
+      if (links != null)
+        sb.append(links.mkString("(", ",", ")")).append("@@@@")
       writer.write(sb.toString())
       writer.flush()
     }

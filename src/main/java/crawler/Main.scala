@@ -15,7 +15,7 @@ import scala.actors.Actor._
   * Created by kai on 2015/11/22.
   */
 object Main extends App {
-  val topicURL = "http://www.zhihu.com/collection/45162757"
+  val topicURL = "http://www.zhihu.com/collection/27038858"
 
   private val links: mutable.Set[String] = new Crawler().getAnswerLinks(topicURL)
 

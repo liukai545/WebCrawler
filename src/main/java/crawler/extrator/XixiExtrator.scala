@@ -23,9 +23,3 @@ class XixiExtrator extends Extrator {
     set
   }
 }
-
-object XixiExtrator{
-  def main(args: Array[String]) {
-    println("xxx")
-  }
-}
