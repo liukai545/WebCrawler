@@ -20,13 +20,20 @@
             <version>4.5</version>
         </dependency>
 
-        <!--        <dependency>
-                    <groupId>udps-sdk-0.3-cdh5.4.0.jar</groupId>
-                    <artifactId>udps-sdk-0.3-cdh5.4.0.jar</artifactId>
-                    <version>0.3</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/lib/udps-sdk-0.3-cdh5.4.0.jar</systemPath>
-                </dependency>-->
+        <dependency>
+            <groupId>udps-sdk-0.3-cdh5.4.0.jar</groupId>
+            <artifactId>udps-sdk-0.3-cdh5.4.0.jar</artifactId>
+            <version>0.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/udps-sdk-0.3-cdh5.4.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>udps-sdk-0.3.jar</groupId>
+            <artifactId>udps-sdk-0.3.jar</artifactId>
+            <version>0.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/udps-sdk-0.3.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
@@ -96,16 +103,16 @@
             <version>${hive.version}</version>
         </dependency>
 
-<!--        <dependency>
-            <groupId>com.typesafe.play</groupId>
-            <artifactId>play-json_2.11</artifactId>
-            <version>2.3.10</version>
-        </dependency>
-        <dependency>
-            <groupId>io.backchat.jerkson</groupId>
-            <artifactId>jerkson_2.9.2</artifactId>
-            <version>0.7.0</version>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>com.typesafe.play</groupId>
+                    <artifactId>play-json_2.11</artifactId>
+                    <version>2.3.10</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.backchat.jerkson</groupId>
+                    <artifactId>jerkson_2.9.2</artifactId>
+                    <version>0.7.0</version>
+                </dependency>-->
 
 
         <!--scala-->
@@ -174,7 +181,7 @@
                         <configuration>
                             <args>
                                 <arg>-encoding</arg>
-                                <arg>GBK</arg>
+                                <arg>UTF-8</arg>
                             </args>
                             <includes>
                                 <!-- Don't have the scala compiler consider *.java files. -->
