@@ -16,7 +16,7 @@ import java.net.URL;
  * Created by kai on 2015/11/24.
  */
 public class TestHtmlParser {
-    public static void main(String[] args) throws IOException, ParserException {
+/*    public static void main(String[] args) throws IOException, ParserException {
         Parser parser = new Parser((HttpURLConnection) (new URL("http://www.zhihu.com/question/21391305/answer/44542857").openConnection()));
 
         NodeFilter filter = new TagNameFilter("div");
@@ -31,5 +31,5 @@ public class TestHtmlParser {
                 System.out.println(("================================================="));
             }
         }
-    }
+    }*/
 }

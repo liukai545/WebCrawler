@@ -1,5 +1,6 @@
 package crawler.datahandling.sparksql
 
+import crawler.common.StructTypeAndHCatSchemaMapping
 import crawler.datahandling.sparksql.CSVReader._
 import crawler.utils.Logs
 import org.apache.hadoop.hive.serde2.typeinfo.TypeInfoFactory
@@ -45,33 +46,8 @@ class CSVReader(path: String, dbName: String, tbName: String) extends Logs {
 
   def save(dataFrame: DataFrame) = {
     val javaRDD: JavaRDD[Row] = dataFrame.toJavaRDD
-    new Save(dbName, tbName).save(javaRDD, convertStructTypeToHCatSchema(structType))
+    new Save(dbName, tbName).save(javaRDD, StructTypeAndHCatSchemaMapping.convertStructTypeToHCatSchema(structType))
   }
-
-  def convertStructTypeToHCatSchema(st: StructType): HCatSchema = {
-    val fieldSchemaList = st.fields.map(st => st match {
-      case data if data.dataType.isInstanceOf[ByteType] => new HCatFieldSchema(data.name, TypeInfoFactory.byteTypeInfo, null)
-      case data if data.dataType.isInstanceOf[ShortType] => new HCatFieldSchema(data.name, TypeInfoFactory.shortTypeInfo, null)
-      case data if data.dataType.isInstanceOf[IntegerType] => new HCatFieldSchema(data.name, TypeInfoFactory.intTypeInfo, null)
-      case data if data.dataType.isInstanceOf[LongType] => new HCatFieldSchema(data.name, TypeInfoFactory.longTypeInfo, null)
-      case data if data.dataType.isInstanceOf[FloatType] => new HCatFieldSchema(data.name, TypeInfoFactory.floatTypeInfo, null)
-      case data if data.dataType.isInstanceOf[DoubleType] => new HCatFieldSchema(data.name, TypeInfoFactory.doubleTypeInfo, null)
-      case data if data.dataType.isInstanceOf[DecimalType] => new HCatFieldSchema(data.name, TypeInfoFactory.decimalTypeInfo, null)
-      case data if data.dataType.isInstanceOf[StringType] => new HCatFieldSchema(data.name, TypeInfoFactory.stringTypeInfo, null)
-      case data if data.dataType.isInstanceOf[BinaryType] => new HCatFieldSchema(data.name, TypeInfoFactory.binaryTypeInfo, null)
-      case data if data.dataType.isInstanceOf[BooleanType] => new HCatFieldSchema(data.name, TypeInfoFactory.booleanTypeInfo, null)
-      case data if data.dataType.isInstanceOf[DateType] => new HCatFieldSchema(data.name, TypeInfoFactory.dateTypeInfo, null)
-      case data if data.dataType.isInstanceOf[TimestampType] => new HCatFieldSchema(data.name, TypeInfoFactory.timestampTypeInfo, null)
-      // 未匹配类型如何定义??
-      case _ => warn("kong"); null
-    })
-    val javaFieldShcemaList = new java.util.ArrayList[HCatFieldSchema](fieldSchemaList.size)
-    for (i <- 0 until fieldSchemaList.size) {
-      javaFieldShcemaList.add(fieldSchemaList(i))
-    }
-    new HCatSchema(javaFieldShcemaList)
-  }
-
 }
 
 object CSVReader {

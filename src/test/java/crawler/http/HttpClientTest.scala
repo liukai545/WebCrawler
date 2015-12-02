@@ -8,10 +8,12 @@ import org.junit.Test
   */
 class HttpClientTest {
   @Test def testGet() = {
+/*
     val (responseCode, content) = HttpClient.get("http://www.zhihu.com/question/21391305/answer/44542857")
 
     println(responseCode)
     println(new String(content))
+*/
 
   }
 }

@@ -1,5 +1,6 @@
 package crawler.datahandling.sparksql;
 
+import crawler.common.HiveDDLUtils;
 import iie.udps.common.hcatalog.SerHCatOutputFormat;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hive.conf.HiveConf;
@@ -23,6 +24,7 @@ import org.apache.hive.hcatalog.data.DefaultHCatRecord;
 import org.apache.hive.hcatalog.data.HCatRecord;
 import org.apache.hive.hcatalog.data.schema.HCatFieldSchema;
 import org.apache.hive.hcatalog.data.schema.HCatSchema;
+import org.apache.hive.hcatalog.mapreduce.HCatInputFormat;
 import org.apache.hive.hcatalog.mapreduce.OutputJobInfo;
 import org.apache.spark.SerializableWritable;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -50,7 +52,7 @@ public class Save {
         this.tbName = tbName;
     }
 
-    public void save(JavaRDD<Row> rdd,  HCatSchema hCatSchema) {
+    public void save(JavaRDD<Row> rdd, HCatSchema hCatSchema) {
         JavaPairRDD<WritableComparable, SerializableWritable<HCatRecord>> writableComparableSerializableWritableJavaPairRDD
                 = rdd.mapToPair(new convertToRecord(hCatSchema));
 
@@ -60,7 +62,7 @@ public class Save {
             outputJob.setOutputKeyClass(WritableComparable.class);
             outputJob.setOutputValueClass(SerializableWritable.class);
 
-            createTable2(dbName, tbName, hCatSchema);
+            HiveDDLUtils.createTable2(dbName, tbName, hCatSchema);
 
             SerHCatOutputFormat.setOutput(outputJob, OutputJobInfo.create(dbName, tbName, new HashMap<String, String>()));
             SerHCatOutputFormat.setSchema(outputJob, hCatSchema);
@@ -69,71 +71,6 @@ public class Save {
             writableComparableSerializableWritableJavaPairRDD.saveAsNewAPIHadoopDataset(outputJob.getConfiguration());
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private boolean createTable(String dbName, String tbName, HCatSchema hCatSchema) {
-        //创建输出表
-        HCatClient hCatClient = null;
-        try {
-            hCatClient = HCatClient.create(new Configuration());
-
-            HCatTable outTable = new HCatTable(dbName, tbName);
-
-            List<HCatFieldSchema> fieldSchemas = hCatSchema.getFields();
-            outTable.cols(fieldSchemas);
-            HCatCreateTableDesc tableDesc = HCatCreateTableDesc.create(outTable).build();
-
-            hCatClient.createTable(tableDesc);
-            return false;
-        } catch (HCatException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private void createTable2(String dbName, String tblName, HCatSchema schema) {
-        HiveMetaStoreClient client = null;
-        try {
-            HiveConf hiveConf = HCatUtil.getHiveConf(new Configuration());
-            client = HCatUtil.getHiveClient(hiveConf);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (client.tableExists(dbName, tblName)) {
-                client.dropTable(dbName, tblName);
-            }
-        } catch (TException e) {
-            e.printStackTrace();
-        }
-        List<FieldSchema> fields = HCatUtil.getFieldSchemaList(schema.getFields());
-        System.out.println(fields);
-        Table table = new Table();
-        table.setDbName(dbName);
-        table.setTableName(tblName);
-
-        StorageDescriptor sd = new StorageDescriptor();
-        sd.setCols(fields);
-        table.setSd(sd);
-        sd.setInputFormat(RCFileInputFormat.class.getName());
-        sd.setOutputFormat(RCFileOutputFormat.class.getName());
-        sd.setParameters(new HashMap<String, String>());
-        sd.setSerdeInfo(new SerDeInfo());
-        sd.getSerdeInfo().setName(table.getTableName());
-        sd.getSerdeInfo().setParameters(new HashMap<String, String>());
-        sd.getSerdeInfo().getParameters().put(serdeConstants.SERIALIZATION_FORMAT, "1");
-        sd.getSerdeInfo().setSerializationLib(org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.class.getName());
-        Map<String, String> tableParams = new HashMap<String, String>();
-        table.setParameters(tableParams);
-        try {
-            client.createTable(table);
-            System.out.println("Create table successfully!");
-        } catch (TException e) {
-            e.printStackTrace();
-            return;
-        } finally {
-            client.close();
         }
     }
 }
