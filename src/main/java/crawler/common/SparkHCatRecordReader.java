@@ -13,6 +13,7 @@ import org.apache.spark.SerializableWritable;
 
 /**
  * Created by liukai on 2015/12/2.
+ * copy from https://github.com/kawaa/SparkHCat
  */
 class SparkHCatRecordReader extends RecordReader<SerializableWritable<Writable>, HCatRecord>  {
     @SuppressWarnings("rawtypes")

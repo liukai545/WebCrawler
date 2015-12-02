@@ -36,7 +36,6 @@ object FilterEnum {
 
   def label = new HasAttributeFilter("class", "zm-tag-editor-labels zg-clear")
 
-  // 注意匿名用户
   def author = new HasAttributeFilter("class", "zm-item-answer-author-info")
 
   def content = new HasAttributeFilter("class", "zm-editable-content clearfix")

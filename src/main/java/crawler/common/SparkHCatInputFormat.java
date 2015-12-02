@@ -17,6 +17,7 @@ import org.apache.hive.hcatalog.data.HCatRecord;
 
 /**
  * Created by liukai on 2015/12/2.
+ * copy form https://github.com/kawaa/SparkHCat
  */
 public class SparkHCatInputFormat extends InputFormat<SerializableWritable<Writable>, HCatRecord> {
     private final HCatInputFormat input;
