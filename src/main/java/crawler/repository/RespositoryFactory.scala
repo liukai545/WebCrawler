@@ -1,6 +1,6 @@
-package crawler.dao
+package crawler.repository
 
-import crawler.dao.RepositoryCategory.RepositoryCategory
+import crawler.repository.RepositoryCategory.RepositoryCategory
 
 /**
   * Created by liukai on 2015/11/27.

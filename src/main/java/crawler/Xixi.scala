@@ -2,7 +2,7 @@ package crawler
 
 import java.io.FileInputStream
 
-import crawler.dao.{RepositoryCategory, RespositoryFactory}
+import crawler.repository.{RepositoryCategory, RespositoryFactory}
 import crawler.extrator.XixiExtrator
 import crawler.http.HttpClient
 import org.apache.commons.io.IOUtils

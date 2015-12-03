@@ -1,6 +1,10 @@
 package crawler;
 
 
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hive.hcatalog.api.HCatClient;
+import org.apache.hive.hcatalog.common.HCatException;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +16,7 @@ public class Test {
     public static void main(String[] args) {
 /*        System.out.println("当前");
         String[] str = {"a", "ccc"};
-
-        List<String> strings = Arrays.asList(str);
+                List<String> strings = Arrays.asList(str);
         List<String> clone = new java.util.ArrayList<String>(strings);
 
         for (int i = 0; i < 50; i++) {

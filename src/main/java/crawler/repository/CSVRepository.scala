@@ -1,4 +1,4 @@
-package crawler.dao
+package crawler.repository
 
 import java.io.PrintWriter
 

@@ -1,4 +1,4 @@
-package crawler.dao
+package crawler.repository
 
 import java.io.PrintWriter
 
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 /**
   * Created by liukai on 2015/11/27.
   */
-class JsonRepository[T](path: String) extends crawler.dao.Repository[T] {
+class JsonRepository[T](path: String) extends crawler.repository.Repository[T] {
 
   private val writer: PrintWriter = new PrintWriter(path)
 

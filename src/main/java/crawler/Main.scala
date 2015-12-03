@@ -2,7 +2,7 @@ package crawler
 
 import java.util.concurrent.{ExecutorService, Executors, Executor}
 
-import crawler.dao.{RespositoryFactory, JsonRepository, RepositoryCategory}
+import crawler.repository.{RespositoryFactory, JsonRepository, RepositoryCategory}
 import crawler.domain.Answer
 import crawler.utils.Constant
 

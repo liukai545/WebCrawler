@@ -1,4 +1,4 @@
-package crawler.dao
+package crawler.repository
 
 /**
   * Created by liukai on 2015/11/27.

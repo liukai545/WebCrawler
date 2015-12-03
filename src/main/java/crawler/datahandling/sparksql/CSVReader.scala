@@ -33,7 +33,11 @@ class CSVReader(path: String, dbName: String, tbName: String) extends Logs {
   def load(): DataFrame = {
     val map: RDD[Row] = sc.textFile(path).map(_.split("\\*\\#\\*\\#")).map(p => Row(p(0), p(1), p(2), p(3), p(4), p(5), p(6)))
     val dataFrame = sqlContext.createDataFrame(map, structType)
-    dataFrame
+
+    dataFrame.registerTempTable("xxx");
+    val sql: DataFrame = sqlContext.sql("select title from xxx")
+
+    sql
 
     /*    dataFrame.registerTempTable("answer")
 
@@ -46,7 +50,7 @@ class CSVReader(path: String, dbName: String, tbName: String) extends Logs {
 
   def save(dataFrame: DataFrame) = {
     val javaRDD: JavaRDD[Row] = dataFrame.toJavaRDD
-    new Save(dbName, tbName).save(javaRDD, StructTypeAndHCatSchemaMapping.convertStructTypeToHCatSchema(structType))
+    new Save(dbName, tbName).save(javaRDD, StructTypeAndHCatSchemaMapping.convertStructTypeToHCatSchema(dataFrame.schema))
   }
 }
 
