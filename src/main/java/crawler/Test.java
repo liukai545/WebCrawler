@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-/*        System.out.println("当前");
+     /*      System.out.println("当前");
         String[] str = {"a", "ccc"};
                 List<String> strings = Arrays.asList(str);
         List<String> clone = new java.util.ArrayList<String>(strings);
@@ -24,7 +24,11 @@ public class Test {
             System.out.println(strings.get(0));
         }*/
 
-        int[] a = new int[2];
+        String str = "liukai.xxx";
+        str = str.substring("liukai".length() + 1);
+        System.out.println(str);
+
+        System.out.println("JSON数据源加载算子".hashCode());
 
     }
 }

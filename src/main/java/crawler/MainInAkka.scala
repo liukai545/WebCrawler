@@ -2,39 +2,50 @@ package crawler
 
 import java.util.concurrent.{ExecutorService, Executors}
 
+import akka.actor.{ActorRef, ActorSystem, Props}
 import crawler.domain.Answer
 import crawler.repository.{RepositoryCategory, RespositoryFactory}
 import crawler.utils.Constant
 
-import scala.actors.Actor
-import scala.actors.Actor._
 import scala.collection.mutable
 
 
 /**
   * Created by kai on 2015/11/22.
+  * 使用Akka框架传递消息
   */
 object Main extends App {
-  val topicURL = "http://www.zhihu.com/collection/20205640"
+  val topicURL = "https://www.zhihu.com/collection/20205640"
 
   private val links: mutable.Set[String] = new Crawler().getAnswerLinks(topicURL)
 
-  private val save: Actor = actor {
+  val system = ActorSystem("actor-answer")
+  private val of: ActorRef = system.actorOf(Props(classOf[Save], links.size))
+  val save = of
+  println(save.toString())
 
+  class Save(total: Int) extends akka.actor.Actor {
     val respository = RespositoryFactory.createRespository[Answer](RepositoryCategory.CSV, "d://zhi/answer")
-    var end = false
-    while (!end) {
-      receive {
-        case (answer: Answer, finished: Finished) => println(answer.title); respository.save(answer); finished ! "msg"
-        case boo: Boolean => end = true; respository.close(); executor.shutdown();
-        case _ => println("end")
+
+    var count = 0
+
+    override def receive = {
+      case answer: Answer => {
+        println(answer.title);
+        respository.save(answer);
+        count += 1;
+        println(count)
+        if (count == total) {
+          respository.close()
+          system.shutdown()
+          executor.shutdown()
+          println("shutdown")
+        }
       }
     }
-
   }
+
   val executor: ExecutorService = Executors.newFixedThreadPool(10)
-  private val finished: Finished = new Finished(links.size, save)
-  finished.start()
   links.foreach(link => {
     println(link)
 
@@ -43,7 +54,7 @@ object Main extends App {
         val answer: Option[Answer] = new Crawler().getAnswer(Constant.ZHIHU_URL + link)
         if (answer.isDefined) {
           val answer1: Answer = answer.get
-          save !(answer1, finished)
+          save ! answer1
         }
       }
     })
@@ -51,17 +62,3 @@ object Main extends App {
   )
 }
 
-class Finished(total: Int, save: Actor) extends Actor {
-  var count = 0;
-
-  override def act(): Unit = {
-    while (count != total) {
-      receive {
-        case msg: String => count += 1; println(count)
-        case _ => println("xxx")
-      }
-    }
-    save ! true
-    println("sended")
-  }
-}
